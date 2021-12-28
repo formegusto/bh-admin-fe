@@ -1,5 +1,7 @@
+import BasicTable from "../common/BasicTable";
+
 function UserMgmtComponent() {
-  return <>유저 관리</>;
+  return <BasicTable />;
 }
 
 export default UserMgmtComponent;

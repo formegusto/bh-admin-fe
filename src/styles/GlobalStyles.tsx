@@ -59,10 +59,6 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
     }
 
-    .MuiOutlinedInput-root fieldset {
-        border-radius: 0;
-    }
-
     body.modal-open {
         overflow: hidden;
     }
