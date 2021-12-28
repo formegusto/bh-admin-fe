@@ -4,12 +4,20 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
+import { createStore } from "redux";
+import { rootReducer } from "./store";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { Provider } from "react-redux";
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
-  <Router>
-    <GlobalStyles />
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <GlobalStyles />
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 

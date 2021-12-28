@@ -24,7 +24,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import ArticleIcon from "@mui/icons-material/Article";
 import UpdateDrawer from "../components/common/UpdateDrawer";
 import EditNotificationsIcon from "@mui/icons-material/EditNotifications";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import PAGENAMES from "../pages/PageNames";
+import SensorsIcon from "@mui/icons-material/Sensors";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -37,6 +39,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 function BaseTemplate() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [open, setOpen] = React.useState<boolean>(false);
   const [updateOpen, setUpdateOpen] = React.useState<boolean>(false);
@@ -181,6 +184,12 @@ function BaseTemplate() {
             </ListItemIcon>
             <ListItemText>신청서 관리</ListItemText>
           </ListItemButton>
+          <ListItemButton onClick={() => navigate("/data-mgmt")}>
+            <ListItemIcon>
+              <SensorsIcon fontSize="large" />
+            </ListItemIcon>
+            <ListItemText>데이터 관리</ListItemText>
+          </ListItemButton>
         </List>
       </LeftDrawer>
 
@@ -193,6 +202,14 @@ function BaseTemplate() {
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+        <Typography
+          variant="h5"
+          sx={{
+            mb: 2,
+          }}
+        >
+          {PAGENAMES[pathname]}
+        </Typography>
         <Outlet />
       </Box>
 

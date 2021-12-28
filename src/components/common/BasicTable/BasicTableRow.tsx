@@ -3,7 +3,7 @@ import { grey } from "@mui/material/colors";
 import TableRow from "@mui/material/TableRow";
 
 const BasicTableRow = styled(TableRow)(({ theme }) => ({
-  "& .MuiTableCell-root:nth-child(1)": {
+  "& .MuiTableCell-root:nth-of-type(1)": {
     boxSizing: "border-box",
     width: 64,
   },
