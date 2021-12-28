@@ -1,5 +1,7 @@
+import UserMgmtComponent from "../components/user-mgmt";
+
 function UserMgmtPage() {
-  return <>유저 관리 페이지</>;
+  return <UserMgmtComponent />;
 }
 
 export default UserMgmtPage;
