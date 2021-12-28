@@ -2,11 +2,10 @@ import { styled } from "@mui/material";
 import { Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import { blue } from "@mui/material/colors";
-
-const drawerWidth = 300;
+import { LEFT_DRAWER_WIDTH } from "../../styles/StyleDatas";
 
 const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
+  width: LEFT_DRAWER_WIDTH,
   backgroundColor: blue[500],
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -31,7 +30,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
 const LeftDrawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  width: drawerWidth,
+  width: LEFT_DRAWER_WIDTH,
   background: blue[500],
   flexShrink: 0,
   whiteSpace: "nowrap",

@@ -1,5 +1,5 @@
 function UserMgmtComponent() {
-  return <>유저관리 컴포넌트</>;
+  return <>유저 관리</>;
 }
 
 export default UserMgmtComponent;

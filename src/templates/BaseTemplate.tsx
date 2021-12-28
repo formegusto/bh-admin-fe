@@ -1,4 +1,6 @@
 import {
+  Alert,
+  Badge,
   Box,
   Divider,
   IconButton,
@@ -7,6 +9,8 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
+  Snackbar,
+  styled,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -18,12 +22,36 @@ import React from "react";
 import Profile, { ProfileImage } from "../components/common/Profile";
 import PersonIcon from "@mui/icons-material/Person";
 import ArticleIcon from "@mui/icons-material/Article";
+import UpdateDrawer from "../components/common/UpdateDrawer";
+import EditNotificationsIcon from "@mui/icons-material/EditNotifications";
+import { Outlet, useNavigate } from "react-router-dom";
 
-function BaseTemplate({ children }: React.PropsWithChildren<any>) {
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+function BaseTemplate() {
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState<boolean>(false);
+  const [updateOpen, setUpdateOpen] = React.useState<boolean>(false);
+  const [newUpdate, setNewUpdate] = React.useState<boolean>(true);
 
   const handleOpen = React.useCallback((open: boolean) => {
     setOpen(open);
+  }, []);
+
+  const handleUpdateOpen = React.useCallback((open: boolean) => {
+    setUpdateOpen(open);
+  }, []);
+
+  const handleNewUpdate = React.useCallback((newUpdate: boolean) => {
+    setNewUpdate(newUpdate);
   }, []);
 
   return (
@@ -53,6 +81,30 @@ function BaseTemplate({ children }: React.PropsWithChildren<any>) {
           <Typography variant="h6" noWrap component="div">
             BEMS-HDMS Admin Page
           </Typography>
+          <IconButton
+            onClick={() => handleUpdateOpen(true)}
+            sx={{
+              position: "absolute",
+              right: "24px",
+              "& .MuiBadge-badge": {
+                width: "14px",
+                height: "20px",
+                background: "#ff4d4f",
+                borderRadius: "100%",
+                color: "#fff",
+                fontSize: "8px",
+              },
+            }}
+          >
+            <Badge badgeContent={4}>
+              <EditNotificationsIcon
+                fontSize="medium"
+                sx={{
+                  color: "#FFF",
+                }}
+              />
+            </Badge>
+          </IconButton>
         </Toolbar>
       </AppBar>
       <LeftDrawer variant="permanent" open={open}>
@@ -117,13 +169,13 @@ function BaseTemplate({ children }: React.PropsWithChildren<any>) {
             )
           }
         >
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate("/user-mgmt")}>
             <ListItemIcon>
               <PersonIcon fontSize="large" />
             </ListItemIcon>
             <ListItemText>사용자 관리</ListItemText>
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate("/app-mgmt")}>
             <ListItemIcon>
               <ArticleIcon fontSize="large" />
             </ListItemIcon>
@@ -132,7 +184,37 @@ function BaseTemplate({ children }: React.PropsWithChildren<any>) {
         </List>
       </LeftDrawer>
 
-      {children}
+      <UpdateDrawer
+        anchor="right"
+        className="update-drawer"
+        open={updateOpen}
+        onClose={() => handleUpdateOpen(false)}
+      ></UpdateDrawer>
+
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <Outlet />
+      </Box>
+
+      <Snackbar
+        open={newUpdate}
+        onClose={() => handleNewUpdate(false)}
+        autoHideDuration={4000}
+        message="Note archived"
+        sx={{
+          transform: "translateY(64px)",
+        }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <Alert severity="info" onClose={() => handleNewUpdate(false)}>
+          새로운 업데이트 내용이 생겼어요.
+          <br />
+          확인 후 저장 버튼을 눌러주세요.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

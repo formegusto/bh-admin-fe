@@ -6,11 +6,11 @@ interface BoxProps extends MuiBoxProps {
 }
 
 export const ProfileImage = styled(Avatar, {
-  shouldForwardProp: (prop) => true,
+  shouldForwardProp: () => true,
 })(({ theme }) => ({
   backgroundColor: "#FFF",
-  width: "56px",
-  height: "56px",
+  width: "48px",
+  height: "48px",
   color: "#333",
   fontSize: "24px",
 }));
@@ -30,7 +30,7 @@ const Profile = styled(Box, {
   color: "#FFF",
 
   "& .MuiTypography-subtitle1": {
-    margin: "16px 0 0",
+    margin: "12px 0 0",
   },
 
   ...(open && {
