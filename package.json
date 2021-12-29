@@ -28,7 +28,6 @@
     "buffer": "^6.0.3",
     "camelcase": "^6.2.1",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
-    "crypto": "^1.0.1",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.2.0",
@@ -51,14 +50,15 @@
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.0.1",
     "prompts": "^2.4.2",
+    "qs": "^6.10.2",
     "react": "^17.0.2",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.0",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.22.5",
     "react-redux": "^7.2.6",
     "react-refresh": "^0.11.0",
     "react-router-dom": "^6.2.1",
-    "react-scripts-cssmodules": "^1.1.50",
     "redux": "^4.1.2",
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.9",
@@ -68,6 +68,7 @@
     "sass-loader": "^12.3.0",
     "semver": "^7.3.5",
     "source-map-loader": "^3.0.0",
+    "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.3",
     "tailwindcss": "^3.0.2",
@@ -141,8 +142,7 @@
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
-      "^src/(.*)$": "<rootDir>/src/$1"
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
     },
     "moduleFileExtensions": [
       "web.js",

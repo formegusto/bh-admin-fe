@@ -1,4 +1,4 @@
 import { createAction } from "redux-actions";
-import { GET_USER_LIST } from "./types";
+import { GetUsersQuery, GET_USER_LIST } from "./types";
 
-export const getUserList = createAction(GET_USER_LIST);
+export const getUserList = createAction<GetUsersQuery | null>(GET_USER_LIST);

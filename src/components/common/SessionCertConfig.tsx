@@ -3,14 +3,14 @@ import styled from "styled-components";
 import AddModeratorIcon from "@mui/icons-material/AddModerator";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import React from "react";
+import { blue } from "@mui/material/colors";
 import SessionCertConnector from "src/store/sessionCert/connector";
 import { ConnectedProps } from "react-redux";
 import getRandomBytes from "src/utils/getRandomBytes";
-import { publicEncrypt } from "crypto";
+import { publicEncrypt } from "crypto-browserify";
 import { symmetricDecrypt, symmetricEncrypt } from "src/utils/ARIAUtils";
 import client from "src/api/client";
 import { REQUEST_ENC_HEADER } from "src/api/types";
-import { blue } from "@mui/material/colors";
 import { Buffer } from "buffer";
 
 interface Props extends ConnectedProps<typeof SessionCertConnector> {}

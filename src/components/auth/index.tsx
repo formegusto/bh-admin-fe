@@ -1,8 +1,15 @@
 import { Box, Button, TextField } from "@mui/material";
 import { blue } from "@mui/material/colors";
+import { SignInInput } from "src/store/auth/types";
 import ketiLogo from "../../assets/logo/keti logo horizontal kor.png";
+import { Control, Controller, UseFormHandleSubmit } from "react-hook-form";
 
-function AuthComponent() {
+type Props = {
+  control: Control<SignInInput, object>;
+  onSubmit: ReturnType<UseFormHandleSubmit<SignInInput>>;
+};
+
+function AuthComponent({ control, onSubmit }: Props) {
   return (
     <Box
       sx={{
@@ -51,10 +58,20 @@ function AuthComponent() {
           },
         }}
       >
-        <form>
-          <TextField label="아이디" />
-          <TextField label="패스워드" type="password" />
-          <Button variant="contained" size="large" fullWidth>
+        <form onSubmit={onSubmit}>
+          <Controller
+            name="username"
+            control={control}
+            render={({ field }) => <TextField label="아이디" {...field} />}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <TextField label="비밀번호" type="password" {...field} />
+            )}
+          />
+          <Button type="submit" variant="contained" size="large" fullWidth>
             로그인
           </Button>
         </form>

@@ -300,7 +300,9 @@ module.exports = function (webpackEnv) {
         modules.additionalModulePaths || []
       ),
       fallback: {
-        crypto: require.resolve("crypto-browserify"),
+        crypto: false,
+        stream: require.resolve("stream-browserify"),
+        buffer: require.resolve("buffer/"),
       },
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
