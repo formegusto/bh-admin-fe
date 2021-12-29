@@ -5,15 +5,26 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import BasicTableRow from "../common/BasicTable/BasicTableRow";
 import BasicTableCell from "../common/BasicTable/BasicTableCell";
-import { Box, MenuItem, Pagination, Select } from "@mui/material";
+import {
+  Box,
+  MenuItem,
+  Pagination,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { GetUsersResponse } from "src/store/user/types";
 import { UserRole } from "src/store/user/types";
+import { UpdateRoleParams } from "src/containers/user-mgmt";
 
 type Props = {
   resUsers?: GetUsersResponse | null;
+  updateRole: (
+    e: SelectChangeEvent<UserRole>,
+    updateInfo: UpdateRoleParams
+  ) => void;
 };
 
-function UserMgmtComponent({ resUsers }: Props) {
+function UserMgmtComponent({ resUsers, updateRole }: Props) {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -41,7 +52,17 @@ function UserMgmtComponent({ resUsers }: Props) {
                 <BasicTableCell align="right">{user.email}</BasicTableCell>
                 <BasicTableCell align="right">{user.phone}</BasicTableCell>
                 <BasicTableCell align="right" className="role">
-                  <Select value={user.role} size="small">
+                  <Select
+                    value={user.role}
+                    size="small"
+                    onChange={(e) =>
+                      updateRole(e, {
+                        username: user.username,
+                        id: user.id,
+                        originalValue: user.role,
+                      })
+                    }
+                  >
                     <MenuItem value={UserRole.user}>사용자</MenuItem>
                     <MenuItem value={UserRole.admin}>관리자</MenuItem>
                   </Select>

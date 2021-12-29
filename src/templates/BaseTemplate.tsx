@@ -1,6 +1,4 @@
 import {
-  Alert,
-  Badge,
   Box,
   Divider,
   IconButton,
@@ -9,7 +7,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
-  Snackbar,
   styled,
   Toolbar,
   Typography,
@@ -23,12 +20,13 @@ import Profile, { ProfileImage } from "../components/common/Profile";
 import PersonIcon from "@mui/icons-material/Person";
 import ArticleIcon from "@mui/icons-material/Article";
 import UpdateDrawer from "../components/common/UpdateDrawer";
-import EditNotificationsIcon from "@mui/icons-material/EditNotifications";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import PAGENAMES from "../pages/PageNames";
 import SensorsIcon from "@mui/icons-material/Sensors";
 import AuthConnector from "src/store/auth/connector";
 import { ConnectedProps } from "react-redux";
+import UpdateSnack from "src/components/common/UpdateSnack";
+import UpdateAlert from "src/components/common/UpdateAlert";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -47,7 +45,6 @@ function BaseTemplate({ user }: Props) {
 
   const [open, setOpen] = React.useState<boolean>(false);
   const [updateOpen, setUpdateOpen] = React.useState<boolean>(false);
-  const [newUpdate, setNewUpdate] = React.useState<boolean>(true);
 
   const handleOpen = React.useCallback((open: boolean) => {
     setOpen(open);
@@ -55,10 +52,6 @@ function BaseTemplate({ user }: Props) {
 
   const handleUpdateOpen = React.useCallback((open: boolean) => {
     setUpdateOpen(open);
-  }, []);
-
-  const handleNewUpdate = React.useCallback((newUpdate: boolean) => {
-    setNewUpdate(newUpdate);
   }, []);
 
   return (
@@ -88,30 +81,7 @@ function BaseTemplate({ user }: Props) {
           <Typography variant="h6" noWrap component="div">
             BEMS-HDMS Admin Page
           </Typography>
-          <IconButton
-            onClick={() => handleUpdateOpen(true)}
-            sx={{
-              position: "absolute",
-              right: "24px",
-              "& .MuiBadge-badge": {
-                width: "14px",
-                height: "20px",
-                background: "#ff4d4f",
-                borderRadius: "100%",
-                color: "#fff",
-                fontSize: "8px",
-              },
-            }}
-          >
-            <Badge badgeContent={4}>
-              <EditNotificationsIcon
-                fontSize="medium"
-                sx={{
-                  color: "#FFF",
-                }}
-              />
-            </Badge>
-          </IconButton>
+          <UpdateAlert handleUpdateOpen={handleUpdateOpen} />
         </Toolbar>
       </AppBar>
       <LeftDrawer variant="permanent" open={open}>
@@ -217,25 +187,7 @@ function BaseTemplate({ user }: Props) {
         <Outlet />
       </Box>
 
-      <Snackbar
-        open={newUpdate}
-        onClose={() => handleNewUpdate(false)}
-        autoHideDuration={4000}
-        message="Note archived"
-        sx={{
-          transform: "translateY(64px)",
-        }}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        <Alert severity="info" onClose={() => handleNewUpdate(false)}>
-          새로운 업데이트 내용이 생겼어요.
-          <br />
-          확인 후 저장 버튼을 눌러주세요.
-        </Alert>
-      </Snackbar>
+      <UpdateSnack />
     </Box>
   );
 }
