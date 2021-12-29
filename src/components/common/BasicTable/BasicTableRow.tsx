@@ -7,7 +7,7 @@ const BasicTableRow = styled(TableRow)(({ theme }) => ({
     boxSizing: "border-box",
     width: 64,
   },
-  "& .role": {
+  "& .role, .status": {
     boxSizing: "border-box",
     width: 190,
   },

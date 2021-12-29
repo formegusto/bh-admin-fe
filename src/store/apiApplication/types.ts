@@ -4,7 +4,7 @@ export type GetApplicationsResponse = {
   currentPage: number;
   lastPage: number;
   count: number;
-  users: ApiApplicationData[];
+  applications: ApiApplicationData[];
 };
 
 export enum ApiApplicationStatus {
