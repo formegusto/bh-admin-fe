@@ -1,7 +1,7 @@
-import AppMgmtComponent from "../components/app-mgmt";
+import AppMgmtContainer from "../containers/app-mgmt";
 
 function AppMgmtPage() {
-  return <AppMgmtComponent />;
+  return <AppMgmtContainer />;
 }
 
 export default AppMgmtPage;

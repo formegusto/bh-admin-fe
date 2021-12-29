@@ -3,7 +3,14 @@ import authSaga from "./auth/saga";
 import sessionCertSaga from "./sessionCert/saga";
 import updateSaga from "./update/saga";
 import userSaga from "./user/saga";
+import apiApplicationSaga from "./apiApplication/saga";
 
 export default function* RootSaga() {
-  yield all([sessionCertSaga(), authSaga(), userSaga(), updateSaga()]);
+  yield all([
+    sessionCertSaga(),
+    authSaga(),
+    userSaga(),
+    updateSaga(),
+    apiApplicationSaga(),
+  ]);
 }
