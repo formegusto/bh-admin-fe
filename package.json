@@ -15,11 +15,14 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "axios": "^0.24.0",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
+    "react-scripts-cssmodules": "^1.1.50",
     "redux": "^4.1.2",
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.9",
@@ -29,7 +32,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "export PORT=5000 && react-scripts start",
+    "start": "export PORT=4000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -52,7 +55,13 @@
       "last 1 safari version"
     ]
   },
+  "paths": {
+    "crypto": [
+      "./crypto.ts"
+    ]
+  },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react-redux": "^7.1.21",
     "@types/redux": "^3.6.0",
     "@types/redux-actions": "^2.6.2",
