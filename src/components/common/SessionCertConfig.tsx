@@ -11,6 +11,7 @@ import { symmetricDecrypt, symmetricEncrypt } from "src/utils/ARIAUtils";
 import client from "src/api/client";
 import { REQUEST_ENC_HEADER } from "src/api/types";
 import { blue } from "@mui/material/colors";
+import { Buffer } from "buffer";
 
 interface Props extends ConnectedProps<typeof SessionCertConnector> {}
 
