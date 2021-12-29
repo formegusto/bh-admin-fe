@@ -1,5 +1,5 @@
 import Routing from "./pages";
-import { publicEncrypt } from "crypto";
+import { publicEncrypt } from "crypto-browserify";
 
 function App() {
   console.log(publicEncrypt);
