@@ -9,6 +9,8 @@ import Paper from "@mui/material/Paper";
 import BasicTableCell from "./BasicTable/BasicTableCell";
 import BasicTableRow from "./BasicTable/BasicTableRow";
 import ClearIcon from "@mui/icons-material/Clear";
+import { ConnectedProps } from "react-redux";
+import UpdateConnector from "src/store/update/connector";
 
 const CustomDrawer = styled(MuiDrawer, {
   shouldForwardProp: () => true,
@@ -38,11 +40,9 @@ const CustomDrawer = styled(MuiDrawer, {
   },
 }));
 
-interface Props extends DrawerProps {
-  updateDatas?: any;
-}
+interface Props extends ConnectedProps<typeof UpdateConnector>, DrawerProps {}
 
-function UpdateDrawer({ updateDatas, ...drawerProps }: Props) {
+function UpdateDrawer({ updates, ...drawerProps }: Props) {
   return (
     <CustomDrawer {...drawerProps}>
       <Typography variant="h6" sx={{ p: "16px" }}>
@@ -61,19 +61,17 @@ function UpdateDrawer({ updateDatas, ...drawerProps }: Props) {
           <TableHead>
             <BasicTableRow>
               <BasicTableCell>분류</BasicTableCell>
+              <BasicTableCell>대상</BasicTableCell>
               <BasicTableCell>내용</BasicTableCell>
-              <BasicTableCell>기존 값</BasicTableCell>
-              <BasicTableCell>새로운 값</BasicTableCell>
               <BasicTableCell></BasicTableCell>
             </BasicTableRow>
           </TableHead>
           <TableBody>
-            {Array.from({ length: 20 }).map(() => (
-              <BasicTableRow>
-                <BasicTableCell>분류</BasicTableCell>
-                <BasicTableCell>내용</BasicTableCell>
-                <BasicTableCell>기존 값</BasicTableCell>
-                <BasicTableCell>새로운 값</BasicTableCell>
+            {updates.map((update, idx) => (
+              <BasicTableRow key={idx}>
+                <BasicTableCell>{update.type}</BasicTableCell>
+                <BasicTableCell>{update.target}</BasicTableCell>
+                <BasicTableCell>{update.description}</BasicTableCell>
                 <BasicTableCell
                   align="right"
                   sx={{
@@ -91,27 +89,6 @@ function UpdateDrawer({ updateDatas, ...drawerProps }: Props) {
                 </BasicTableCell>
               </BasicTableRow>
             ))}
-            <BasicTableRow>
-              <BasicTableCell>분류</BasicTableCell>
-              <BasicTableCell>내용</BasicTableCell>
-              <BasicTableCell>기존 값</BasicTableCell>
-              <BasicTableCell>새로운 값</BasicTableCell>
-              <BasicTableCell
-                align="right"
-                sx={{
-                  width: "64px !important",
-                  height: "64px !important",
-                }}
-              >
-                <IconButton
-                  sx={{
-                    padding: "0",
-                  }}
-                >
-                  <ClearIcon fontSize="small" />
-                </IconButton>
-              </BasicTableCell>
-            </BasicTableRow>
           </TableBody>
         </Table>
         <Fab
@@ -127,4 +104,4 @@ function UpdateDrawer({ updateDatas, ...drawerProps }: Props) {
   );
 }
 
-export default UpdateDrawer;
+export default UpdateConnector(UpdateDrawer);
