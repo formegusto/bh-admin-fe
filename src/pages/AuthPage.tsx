@@ -1,7 +1,7 @@
-import AuthComponent from "../components/auth";
+import AuthContainer from "src/containers/auth";
 
 function AuthPage() {
-  return <AuthComponent />;
+  return <AuthContainer />;
 }
 
 export default AuthPage;

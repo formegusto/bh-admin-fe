@@ -7,7 +7,7 @@ const BasicTableRow = styled(TableRow)(({ theme }) => ({
     boxSizing: "border-box",
     width: 64,
   },
-  "& .MuiTableCell-root:last-child": {
+  "& .role": {
     boxSizing: "border-box",
     width: 190,
   },

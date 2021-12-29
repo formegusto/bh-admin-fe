@@ -27,6 +27,8 @@ import EditNotificationsIcon from "@mui/icons-material/EditNotifications";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import PAGENAMES from "../pages/PageNames";
 import SensorsIcon from "@mui/icons-material/Sensors";
+import AuthConnector from "src/store/auth/connector";
+import { ConnectedProps } from "react-redux";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -37,7 +39,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-function BaseTemplate() {
+interface Props extends ConnectedProps<typeof AuthConnector> {}
+
+function BaseTemplate({ user }: Props) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -132,9 +136,9 @@ function BaseTemplate() {
           </IconButton>
         </Toolbar>
         <Profile open={open}>
-          <ProfileImage>F</ProfileImage>
+          <ProfileImage>{user!.username[0].toUpperCase()}</ProfileImage>
           <Typography variant="subtitle1" component="div">
-            관리자 formegusto
+            관리자 {user!.username}
           </Typography>
         </Profile>
 
@@ -236,4 +240,4 @@ function BaseTemplate() {
   );
 }
 
-export default BaseTemplate;
+export default AuthConnector(BaseTemplate);

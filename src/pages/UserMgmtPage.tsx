@@ -1,7 +1,7 @@
-import UserMgmtComponent from "../components/user-mgmt";
+import UserMgmtContainer from "../containers/user-mgmt";
 
 function UserMgmtPage() {
-  return <UserMgmtComponent />;
+  return <UserMgmtContainer />;
 }
 
 export default UserMgmtPage;
