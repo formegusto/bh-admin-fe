@@ -6,3 +6,5 @@ const BASEPATH = "/admin/apiService";
 
 export const getApplicationList = (query: GetApplicationsQuery) =>
   client.get(`${BASEPATH}?${qs.stringify(query)}`);
+export const patchApplication = (id: number, encBody: string) =>
+  client.patch(`${BASEPATH}/${id}`, encBody);

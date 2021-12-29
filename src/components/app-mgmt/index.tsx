@@ -16,12 +16,17 @@ import {
   ApiApplicationStatus,
   GetApplicationsResponse,
 } from "src/store/apiApplication/types";
+import { UpdateStatusParams } from "src/containers/app-mgmt";
 
 type Props = {
   resApplications?: GetApplicationsResponse | null;
+  updateStatus: (
+    e: SelectChangeEvent<ApiApplicationStatus>,
+    updateInfo: UpdateStatusParams
+  ) => void;
 };
 
-function AppMgmtComponent({ resApplications }: Props) {
+function AppMgmtComponent({ resApplications, updateStatus }: Props) {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -41,7 +46,17 @@ function AppMgmtComponent({ resApplications }: Props) {
                 <BasicTableCell>{app.user.username}</BasicTableCell>
                 <BasicTableCell>{app.purpose}</BasicTableCell>
                 <BasicTableCell align="right" className="status">
-                  <Select value={app.status} size="small">
+                  <Select
+                    value={app.status}
+                    size="small"
+                    onChange={(e) =>
+                      updateStatus(e, {
+                        id: app.id,
+                        username: app.user.username,
+                        originalValue: app.status,
+                      })
+                    }
+                  >
                     <MenuItem value={ApiApplicationStatus.WAITING}>
                       대기중
                     </MenuItem>
