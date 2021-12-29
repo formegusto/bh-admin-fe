@@ -42,7 +42,7 @@ const CustomDrawer = styled(MuiDrawer, {
 
 interface Props extends ConnectedProps<typeof UpdateConnector>, DrawerProps {}
 
-function UpdateDrawer({ updates, ...drawerProps }: Props) {
+function UpdateDrawer({ updates, saveUpdate, ...drawerProps }: Props) {
   return (
     <CustomDrawer {...drawerProps}>
       <Typography variant="h6" sx={{ p: "16px" }}>
@@ -96,6 +96,7 @@ function UpdateDrawer({ updates, ...drawerProps }: Props) {
           variant="extended"
           autoFocus
           color="primary"
+          onClick={saveUpdate}
         >
           저장하기
         </Fab>

@@ -6,7 +6,14 @@ export type UpdateForm = {
   type: "GET" | "POST" | "DELETE" | "PATCH" | "PUT";
   target: string;
   description: string;
-  action: () => Promise<AxiosResponse>;
+  action: {
+    requestInfo: {
+      id?: number;
+      body?: any;
+      query?: any;
+    };
+    api: (...params: any[]) => Promise<AxiosResponse>;
+  };
 };
 
 // Redux Action Type

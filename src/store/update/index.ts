@@ -1,5 +1,10 @@
 import { handleActions } from "redux-actions";
-import { ADD_UPDATE, REMOVE_UPDATE, UpdateForm } from "./types";
+import {
+  ADD_UPDATE,
+  REMOVE_UPDATE,
+  SAVE_UPDATE_SUCCESS,
+  UpdateForm,
+} from "./types";
 
 type UpdateStore = {
   updates: UpdateForm[];
@@ -22,6 +27,9 @@ const updateReducer = handleActions<UpdateStore, Payload>(
         action.payload as number,
         (action.payload as number) + 1
       ),
+    }),
+    [SAVE_UPDATE_SUCCESS]: () => ({
+      updates: [],
     }),
   },
   updateStore

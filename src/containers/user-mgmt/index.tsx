@@ -1,7 +1,7 @@
 import { SelectChangeEvent } from "@mui/material";
 import React from "react";
 import { ConnectedProps } from "react-redux";
-import client from "src/api/client";
+import Api from "src/api";
 import UserMgmtComponent from "src/components/user-mgmt";
 import UserConnector from "src/store/user/connector";
 import { GetUsersResponse, UserRole } from "src/store/user/types";
@@ -47,7 +47,15 @@ function UserMgmtContainer({ getUserList, users, addUpdate }: Props) {
         type: "PATCH",
         target: "사용자 역할",
         description: `${updateInfo.username}님의 역할을 ${updateInfo.originalValue} 에서 ${e.target.value}(으)로 수정합니다.`,
-        action: () => client.patch(`/admin/user/${updateInfo.id}`),
+        action: {
+          requestInfo: {
+            id: updateInfo.id,
+            body: {
+              role: e.target.value,
+            },
+          },
+          api: Api["UserAPI"].patchUsers,
+        },
       });
     },
     [addUpdate, resUsers]
