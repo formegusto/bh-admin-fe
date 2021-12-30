@@ -17,6 +17,8 @@ export type ApiApplicationData = {
   id: number;
   purpose: string;
   status: ApiApplicationStatus;
+  apiKey: string;
+  symmetricKey: string;
   user: {
     username: string;
   };
