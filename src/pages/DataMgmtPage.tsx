@@ -1,5 +1,7 @@
+import DataMgmtComponent from "src/components/data-mgmt";
+
 function DataMgmtPage() {
-  return <>데이터 관리</>;
+  return <DataMgmtComponent />;
 }
 
 export default DataMgmtPage;
