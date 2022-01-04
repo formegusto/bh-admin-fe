@@ -11,6 +11,7 @@ function DataMgmtContainer({
   buildings,
   units,
   sensors,
+  reports,
 }: Props) {
   React.useEffect(() => {
     if (sessionCert && !buildings) {
@@ -35,6 +36,7 @@ function DataMgmtContainer({
       buildings={buildings}
       units={units}
       sensors={sensors}
+      reports={reports}
       selectEvent={selectEvent}
     />
   );

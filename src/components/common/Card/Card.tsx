@@ -7,14 +7,15 @@ type Props = {
     name: string;
     image?: string;
   };
-  selectEvent: (target: "unit" | "sensor" | "report", id: number) => void;
-  eventTarget: "unit" | "sensor" | "report";
+  selectId: number | null;
+  selectEvent: (id: number) => void;
 };
 
-function Card({ size, contents, selectEvent, eventTarget }: Props) {
+function Card({ size, contents, selectId, selectEvent }: Props) {
   return (
     <Box
-      onClick={() => selectEvent(eventTarget, contents.id)}
+      onClick={() => selectEvent(contents.id)}
+      className={selectId && selectId === contents.id ? "active" : ""}
       sx={{
         position: "relative",
 
@@ -38,12 +39,23 @@ function Card({ size, contents, selectEvent, eventTarget }: Props) {
                   height: 295,
                 },
               },
+              "&.active": {
+                "& .name": {
+                  height: 295,
+                },
+              },
             }
           : {
               width: 200,
               height: 100,
               margin: "0 10px 10px 0",
               "&:hover": {
+                "& .name": {
+                  borderColor: "#26446D",
+                  color: "#26446D",
+                },
+              },
+              "&.active": {
                 "& .name": {
                   borderColor: "#26446D",
                   color: "#26446D",

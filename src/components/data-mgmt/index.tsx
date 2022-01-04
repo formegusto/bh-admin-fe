@@ -1,14 +1,22 @@
-import { Building, Sensor, Unit } from "src/store/information/types";
+import { Building, Report, Sensor, Unit } from "src/store/information/types";
 import CardGroup from "../common/Card/CardGroup";
+import ReportTable from "./ReportTable";
 
 type Props = {
   buildings?: Building[] | null;
   units?: Unit[] | null;
   sensors?: Sensor[] | null;
+  reports?: Report[] | null;
   selectEvent: (target: "unit" | "sensor" | "report", id: number) => void;
 };
 
-function DataMgmtComponent({ buildings, units, sensors, selectEvent }: Props) {
+function DataMgmtComponent({
+  buildings,
+  units,
+  sensors,
+  selectEvent,
+  reports,
+}: Props) {
   return (
     <>
       {buildings && (
@@ -38,7 +46,7 @@ function DataMgmtComponent({ buildings, units, sensors, selectEvent }: Props) {
           eventTarget="report"
         />
       )}
-      {/*  */}
+      {reports && <ReportTable report={reports} />}
     </>
   );
 }

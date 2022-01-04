@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import React from "react";
 import Card from "./Card";
 
 type Props = {
@@ -14,6 +15,16 @@ type Props = {
 };
 
 function CardGroup({ title, size, datas, selectEvent, eventTarget }: Props) {
+  const [selectId, setSelectId] = React.useState<number | null>(null);
+
+  const selectItem = React.useCallback(
+    (id: number) => {
+      setSelectId(id);
+      selectEvent(eventTarget, id);
+    },
+    [selectEvent, eventTarget]
+  );
+
   return (
     <>
       <Typography
@@ -40,8 +51,8 @@ function CardGroup({ title, size, datas, selectEvent, eventTarget }: Props) {
           <Card
             size={size}
             contents={d}
-            selectEvent={selectEvent}
-            eventTarget={eventTarget}
+            selectId={selectId}
+            selectEvent={selectItem}
           />
         ))}
       </Box>
