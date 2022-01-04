@@ -1,7 +1,7 @@
-import DataMgmtComponent from "src/components/data-mgmt";
+import DataMgmtContainer from "src/containers/data-mgmt";
 
 function DataMgmtPage() {
-  return <DataMgmtComponent />;
+  return <DataMgmtContainer />;
 }
 
 export default DataMgmtPage;

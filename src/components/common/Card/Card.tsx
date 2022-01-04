@@ -1,17 +1,20 @@
 import { Box } from "@mui/material";
 
-type Contents = {
-  name: string;
-};
-
 type Props = {
   size: "big" | "small";
-  contents: Contents | (Contents & { image: string });
+  contents: {
+    id: number;
+    name: string;
+    image?: string;
+  };
+  selectEvent: (target: "unit" | "sensor" | "report", id: number) => void;
+  eventTarget: "unit" | "sensor" | "report";
 };
 
-function Card({ size, contents }: Props) {
+function Card({ size, contents, selectEvent, eventTarget }: Props) {
   return (
     <Box
+      onClick={() => selectEvent(eventTarget, contents.id)}
       sx={{
         position: "relative",
 
@@ -51,7 +54,7 @@ function Card({ size, contents }: Props) {
     >
       {size === "big" ? (
         <>
-          <img src={(contents as any).image} alt="이미지" />
+          <img src={`http://localhost:8080${contents.image}`} alt="이미지" />
           <Box
             sx={{
               position: "absolute",

@@ -1,13 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import Card from "./Card";
-import dongshinLibrary from "src/assets/동신대학교 중앙도서관.png";
 
 type Props = {
   title: string;
   size: "big" | "small";
+  datas: {
+    id: number;
+    name: string;
+    image?: string;
+  }[];
+  selectEvent: (target: "unit" | "sensor" | "report", id: number) => void;
+  eventTarget: "unit" | "sensor" | "report";
 };
 
-function CardGroup({ title, size }: Props) {
+function CardGroup({ title, size, datas, selectEvent, eventTarget }: Props) {
   return (
     <>
       <Typography
@@ -30,13 +36,12 @@ function CardGroup({ title, size }: Props) {
           flexWrap: "wrap",
         }}
       >
-        {Array.from({ length: 12 }).map(() => (
+        {datas.map((d) => (
           <Card
             size={size}
-            contents={{
-              name: "동신대학교 중앙도서관",
-              image: dongshinLibrary,
-            }}
+            contents={d}
+            selectEvent={selectEvent}
+            eventTarget={eventTarget}
           />
         ))}
       </Box>
