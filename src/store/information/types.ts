@@ -39,5 +39,10 @@ export type Report = {
   satisfaction?: number;
 };
 
+export type UPDATE_DATA = {
+  name?: string;
+  image?: Blob;
+};
+
 export const [GET_INFOS, GET_INFOS_SUCCESS, GET_INFOS_FAILURE] =
   createActionType("info/get_infos");

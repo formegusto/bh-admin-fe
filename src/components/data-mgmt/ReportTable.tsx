@@ -37,7 +37,7 @@ function ReportTable({ report }: Props) {
       <Table
         sx={{
           "& .createdAt": {
-            width: "200px !important",
+            width: "300px !important",
           },
         }}
       >

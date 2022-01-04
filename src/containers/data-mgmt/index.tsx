@@ -1,5 +1,6 @@
 import React from "react";
 import { ConnectedProps } from "react-redux";
+import FormDialog from "src/components/common/FormDialog";
 import DataMgmtComponent from "src/components/data-mgmt";
 import InformationConnector from "src/store/information/connector";
 
@@ -32,13 +33,16 @@ function DataMgmtContainer({
   );
 
   return (
-    <DataMgmtComponent
-      buildings={buildings}
-      units={units}
-      sensors={sensors}
-      reports={reports}
-      selectEvent={selectEvent}
-    />
+    <>
+      {/* <FormDialog /> */}
+      <DataMgmtComponent
+        buildings={buildings}
+        units={units}
+        sensors={sensors}
+        reports={reports}
+        selectEvent={selectEvent}
+      />
+    </>
   );
 }
 

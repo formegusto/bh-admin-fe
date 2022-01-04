@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import Card from "./Card";
+import CardAdd from "./CardAdd";
 
 type Props = {
   title: string;
@@ -55,6 +56,7 @@ function CardGroup({ title, size, datas, selectEvent, eventTarget }: Props) {
             selectEvent={selectItem}
           />
         ))}
+        <CardAdd cardSize={size} />
       </Box>
     </>
   );
