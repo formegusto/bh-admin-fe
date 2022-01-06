@@ -1,4 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
 
 type Props = {
   size: "big" | "small";
@@ -14,7 +16,6 @@ type Props = {
 function Card({ size, contents, selectId, selectEvent }: Props) {
   return (
     <Box
-      onClick={() => selectEvent(contents.id)}
       className={selectId && selectId === contents.id ? "active" : ""}
       sx={{
         position: "relative",
@@ -38,10 +39,16 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
                 "& .name": {
                   height: 295,
                 },
+                "& .options": {
+                  display: "block",
+                },
               },
               "&.active": {
                 "& .name": {
                   height: 295,
+                },
+                "& .options": {
+                  display: "block",
                 },
               },
             }
@@ -54,11 +61,17 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
                   borderColor: "#26446D",
                   color: "#26446D",
                 },
+                "& .options": {
+                  display: "block",
+                },
               },
               "&.active": {
                 "& .name": {
                   borderColor: "#26446D",
                   color: "#26446D",
+                },
+                "& .options": {
+                  display: "block",
                 },
               },
             }),
@@ -87,6 +100,7 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
               width: "100%",
               height: "30px",
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               background: "#26446D",
@@ -100,6 +114,40 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
             className="name"
           >
             {contents.name}
+            <Box
+              className="options"
+              sx={{
+                mt: 2,
+                display: "none",
+              }}
+            >
+              <Button
+                variant="outlined"
+                sx={{
+                  borderColor: "#FFF",
+                  mr: 1,
+                }}
+                onClick={() => selectEvent(contents.id)}
+              >
+                <VisibilityIcon
+                  sx={{
+                    color: "#fff",
+                  }}
+                />
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  borderColor: "#FFF",
+                }}
+              >
+                <EditIcon
+                  sx={{
+                    color: "#fff",
+                  }}
+                />
+              </Button>
+            </Box>
           </Box>
         </>
       ) : (
@@ -109,6 +157,7 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
               width: "100%",
               height: "100%",
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               color: "#333",
@@ -122,6 +171,40 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
             className="name"
           >
             {contents.name}
+            <Box
+              className="options"
+              sx={{
+                mt: 2,
+                display: "none",
+              }}
+            >
+              <Button
+                variant="outlined"
+                sx={{
+                  borderColor: "#26446D",
+                  mr: 1,
+                }}
+                onClick={() => selectEvent(contents.id)}
+              >
+                <VisibilityIcon
+                  sx={{
+                    color: "#26446D",
+                  }}
+                />
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  borderColor: "#26446D",
+                }}
+              >
+                <EditIcon
+                  sx={{
+                    color: "#26446D",
+                  }}
+                />
+              </Button>
+            </Box>
           </Box>
         </>
       )}
