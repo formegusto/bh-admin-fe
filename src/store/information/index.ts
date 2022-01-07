@@ -1,11 +1,17 @@
 import { handleActions } from "redux-actions";
 import {
   Building,
+  OPEN_CREATE_MODE,
   GET_INFOS_SUCCESS,
   Report,
   ResponseGetInfo,
   Sensor,
   Unit,
+  UPDATE_DATA,
+  OPEN_UPDATE_MODE,
+  VIEWMODE,
+  CLOSE_CREATE_MODE,
+  INIT_INFOS,
 } from "./types";
 
 type InforamtionStore = {
@@ -13,6 +19,8 @@ type InforamtionStore = {
   units?: Unit[] | null;
   sensors?: Sensor[] | null;
   reports?: Report[] | null;
+  viewMode?: VIEWMODE | null;
+  updateData?: Building | Unit | Sensor | null;
 };
 
 const informationStore: InforamtionStore = {
@@ -20,11 +28,22 @@ const informationStore: InforamtionStore = {
   units: null,
   sensors: null,
   reports: null,
+  viewMode: null,
+  updateData: null,
 };
 
-type Payload = ResponseGetInfo;
+type Payload = ResponseGetInfo &
+  VIEWMODE & { viewMode: VIEWMODE; updateData: UPDATE_DATA };
 const informationReducer = handleActions<InforamtionStore, Payload>(
   {
+    [INIT_INFOS]: (state, action) => ({
+      buildings: null,
+      units: null,
+      sensors: null,
+      reports: null,
+      viewMode: null,
+      updateData: null,
+    }),
     [GET_INFOS_SUCCESS]: (state, action) => ({
       ...state,
       ...(action.payload.target === "building"
@@ -44,6 +63,25 @@ const informationReducer = handleActions<InforamtionStore, Payload>(
             reports: action.payload.data as Report[],
           }
         : {}),
+    }),
+    [OPEN_CREATE_MODE]: (state, action) => ({
+      ...state,
+      viewMode: {
+        ...action.payload,
+      },
+    }),
+    [OPEN_UPDATE_MODE]: (state, action) => ({
+      ...state,
+      viewMode: {
+        ...action.payload.viewMode,
+      },
+      updateData: {
+        ...action.payload.updateData,
+      },
+    }),
+    [CLOSE_CREATE_MODE]: (state, action) => ({
+      ...state,
+      viewMode: null,
     }),
   },
   informationStore

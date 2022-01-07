@@ -7,21 +7,39 @@ type Props = {
   title: string;
   size: "big" | "small";
   datas: {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
     image?: string;
   }[];
-  selectEvent: (target: "unit" | "sensor" | "report", id: number) => void;
+  selectEvent: (target: "unit" | "sensor" | "report", id?: number) => void;
+  addAction: () => void;
+  updateAction: (
+    id: number,
+    contents: {
+      name: string;
+      image?: string;
+    }
+  ) => void;
   eventTarget: "unit" | "sensor" | "report";
 };
 
-function CardGroup({ title, size, datas, selectEvent, eventTarget }: Props) {
+function CardGroup({
+  title,
+  size,
+  datas,
+  selectEvent,
+  eventTarget,
+  addAction,
+  updateAction,
+}: Props) {
   const [selectId, setSelectId] = React.useState<number | null>(null);
 
   const selectItem = React.useCallback(
-    (id: number) => {
-      setSelectId(id);
-      selectEvent(eventTarget, id);
+    (id?: number) => {
+      if (id) {
+        setSelectId(id);
+        selectEvent(eventTarget, id);
+      }
     },
     [selectEvent, eventTarget]
   );
@@ -54,9 +72,12 @@ function CardGroup({ title, size, datas, selectEvent, eventTarget }: Props) {
             contents={d}
             selectId={selectId}
             selectEvent={selectItem}
+            updateAction={() =>
+              updateAction(d.id!, { name: d.name!, image: d.image })
+            }
           />
         ))}
-        <CardAdd cardSize={size} />
+        <CardAdd cardSize={size} onClick={addAction} />
       </Box>
     </>
   );

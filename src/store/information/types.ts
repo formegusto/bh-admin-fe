@@ -13,21 +13,21 @@ export type InfosPath = {
 };
 
 export type Building = {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
   image?: string;
 };
 
 export type Unit = {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 };
 
 export interface Sensor extends Unit {}
 
 export type Report = {
   [key: string]: any;
-  createdAt: string;
+  createdAt?: string;
 
   isStay?: boolean;
   residentCount?: number;
@@ -40,9 +40,21 @@ export type Report = {
 };
 
 export type UPDATE_DATA = {
+  id?: number;
   name?: string;
-  image?: Blob;
+  image?: Blob | string;
+};
+
+export type VIEWMODE = {
+  rootId?: string | null;
+  type: "create" | "update";
+  target: "building" | "unit" | "sensor";
 };
 
 export const [GET_INFOS, GET_INFOS_SUCCESS, GET_INFOS_FAILURE] =
   createActionType("info/get_infos");
+export const INIT_INFOS = "info/init";
+export const OPEN_CREATE_MODE = "info/create_mode/open";
+export const CLOSE_CREATE_MODE = "info/create_mode/close";
+export const OPEN_UPDATE_MODE = "info/update_mode/open";
+export const CLOSE_UPDATE_MODE = "info/update_mode/close";

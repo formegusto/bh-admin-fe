@@ -5,15 +5,16 @@ import EditIcon from "@mui/icons-material/Edit";
 type Props = {
   size: "big" | "small";
   contents: {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
     image?: string;
   };
   selectId: number | null;
-  selectEvent: (id: number) => void;
+  selectEvent: (id?: number) => void;
+  updateAction: () => void;
 };
 
-function Card({ size, contents, selectId, selectEvent }: Props) {
+function Card({ size, contents, selectId, selectEvent, updateAction }: Props) {
   return (
     <Box
       className={selectId && selectId === contents.id ? "active" : ""}
@@ -140,6 +141,7 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
                 sx={{
                   borderColor: "#FFF",
                 }}
+                onClick={() => updateAction()}
               >
                 <EditIcon
                   sx={{
@@ -197,6 +199,7 @@ function Card({ size, contents, selectId, selectEvent }: Props) {
                 sx={{
                   borderColor: "#26446D",
                 }}
+                onClick={() => updateAction()}
               >
                 <EditIcon
                   sx={{

@@ -1,3 +1,4 @@
+import React from "react";
 import { Building, Report, Sensor, Unit } from "src/store/information/types";
 import CardGroup from "../common/Card/CardGroup";
 import ReportTable from "./ReportTable";
@@ -7,7 +8,16 @@ type Props = {
   units?: Unit[] | null;
   sensors?: Sensor[] | null;
   reports?: Report[] | null;
-  selectEvent: (target: "unit" | "sensor" | "report", id: number) => void;
+  selectEvent: (target: "unit" | "sensor" | "report", id?: number) => void;
+  addAction: (target: "building" | "unit" | "sensor") => void;
+  updateAction: (
+    target: "building" | "unit" | "sensor",
+    id: number,
+    contents: {
+      name: string;
+      image?: string;
+    }
+  ) => void;
 };
 
 function DataMgmtComponent({
@@ -16,6 +26,8 @@ function DataMgmtComponent({
   sensors,
   selectEvent,
   reports,
+  addAction,
+  updateAction,
 }: Props) {
   return (
     <>
@@ -26,6 +38,14 @@ function DataMgmtComponent({
           datas={buildings}
           selectEvent={selectEvent}
           eventTarget="unit"
+          addAction={() => addAction("building")}
+          updateAction={(
+            id: number,
+            contents: {
+              name: string;
+              image?: string;
+            }
+          ) => updateAction("building", id, contents)}
         />
       )}
       {units && (
@@ -35,6 +55,14 @@ function DataMgmtComponent({
           datas={units}
           selectEvent={selectEvent}
           eventTarget="sensor"
+          addAction={() => addAction("unit")}
+          updateAction={(
+            id: number,
+            contents: {
+              name: string;
+              image?: string;
+            }
+          ) => updateAction("unit", id, contents)}
         />
       )}
       {sensors && (
@@ -44,6 +72,14 @@ function DataMgmtComponent({
           datas={sensors}
           selectEvent={selectEvent}
           eventTarget="report"
+          addAction={() => addAction("sensor")}
+          updateAction={(
+            id: number,
+            contents: {
+              name: string;
+              image?: string;
+            }
+          ) => updateAction("sensor", id, contents)}
         />
       )}
       {reports && <ReportTable report={reports} />}
